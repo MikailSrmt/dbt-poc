@@ -1,0 +1,22 @@
+version: 2
+models:
+    - name: weekly_metrics
+      description: "Includes weekly metric."
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Project Name"
+            tests:
+                - unique
+                - not_null
+          - name: minutes
+            description: "Duration in minutes"
+            tests:
+                - unique
+                - not_null
+            
+        
