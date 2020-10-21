@@ -33,5 +33,3 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   ikom_data_learnings:
-      toggler:
-          materialized: view
