@@ -1,0 +1,17 @@
+{{ config(materialized='table') }}
+
+select TO_CHAR(s.date,'YYYY-MM-DD'),
+coalesce(sales, '0') as sales,
+coalesce(sold_items, '0') as sold_items,
+coalesce(facebook_spend, '0') facebook_spend,
+coalesce(google_spend, '0') google_spend
+from {{ref('stg_sales_with_sold_items_us')}} s left outer join {{ref('stg_fb_spend_with_google_spend_us')}} f on s.date=f.date
+
+UNION
+
+select TO_CHAR(f.date,'YYYY-MM-DD'),
+coalesce(sales, '0') as sales,
+coalesce(sold_items, '0') as sold_items,
+coalesce(facebook_spend, '0') facebook_spend,
+coalesce(google_spend, '0') google_spend
+from {{ref('stg_sales_with_sold_items_us')}} s right outer join {{ref('stg_fb_spend_with_google_spend_us')}} f on s.date=f.date
